@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -13,6 +14,18 @@ import android.widget.Toast;
  */
 
 public class BaseActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActivityUtil.addActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityUtil.removeActivity(this);
+    }
+
     protected void jumpToActivity(Class<?> mClass){
         startActivity(new Intent(this, mClass));
     }
@@ -68,7 +81,8 @@ public class BaseActivity extends AppCompatActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        System.exit(0);
+//                        System.exit(0);
+                        ActivityUtil.removeAllActivity();
                     }
                 }).setNegativeButton("取消", null).show();
     }

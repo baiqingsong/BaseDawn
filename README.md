@@ -9,6 +9,18 @@ activity 的基类
 添加了跳转公共方法和吐司公共方法
 ```
 public class BaseActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActivityUtil.addActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityUtil.removeActivity(this);
+    }
+
     protected void jumpToActivity(Class<?> mClass){
         startActivity(new Intent(this, mClass));
     }
@@ -64,7 +76,8 @@ public class BaseActivity extends AppCompatActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        System.exit(0);
+//                        System.exit(0);
+                        ActivityUtil.removeAllActivity();
                     }
                 }).setNegativeButton("取消", null).show();
     }
