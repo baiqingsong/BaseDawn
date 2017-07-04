@@ -1,7 +1,7 @@
 #  基类设置
 
-* [BaseActivity](#BaseActivity)
-* [BaseApplication](#BaseApplication)
+* [BaseActivity](#baseactivity)
+* [BaseApplication](#baseapplication)
 
 
 ## BaseActivity
